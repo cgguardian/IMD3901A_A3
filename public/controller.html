@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <title>IMD3901A -  A3</title>
+            <meta name="description" content="IMD3901A - A3 - Chrissy Merpaw">
+            <script src="/js/aframe.min.js"></script> <!-- https://github.com/aframevr/aframe -->
+            <script src="/js/spherical-env-map.js"></script> <!-- https://github.com/aframevr/aframe -->
+    
+            <!-- box scripts -->
+            <script src="/js/c1-3.js"></script>
+            <script src="/js/c1-2.js"></script>
+            <script src="/js/c1-1.js"></script>
+            <script src="/js/c2-3.js"></script>
+            <script src="/js/c2-1.js"></script>
+            <script src="/js/c3-3.js"></script>
+            <script src="/js/c3-2.js"></script>
+            <script src="/js/c3-1.js"></script>
+
+            <!-- level select-->
+            <script src="/js/lev1.js"></script>
+            <script src="/js/lev2.js"></script>
+            <script src="/js/lev3.js"></script>
+
+            <!-- score counter-->
+            <script src="/js/score.js"></script>
+    </head>
+    <body>
+        <h1>Welcome!</h1>
+
+        <!-- https://aframe.io/docs/0.7.0/components/gltf-model.html#sidebar -->
+        <a-scene shadow="type:basic;">
+                <a-assets timeout="3000">
+                    <!-- floor and cube colours from here: https://glitch.com/@aframe?fbclid=IwAR0sGox2xPh519A4MEG5m82eOKMnbVZYa0XYuOD4NcVbOasvgIemgtCvysw -->
+                    <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg">
+                </a-assets>
+
+                <a-entity position="0 2 0" camera look-controls wasd-controls>
+                    <a-entity cursor="fuse: true; fuseTimeout: 500;" 
+                              position="0 0 -1"
+                              geometry="primitive:ring; radiusInner:0.02; radiusOuter:0.03;"
+                              material="shader:flat; color:black;">
+                    </a-entity>
+                </a-entity>
+
+                <!-- start -->
+                <a-text id="point" value="<-- Turn to the left!" position="-1.5 4 -5" color="#FFF" scale = "1.5 1.5 1.5" visible="true"></a-text>
+
+                <a-text id= "t1" value="Level 1" position="-5 2 2.5" color="#FFF" scale ="1.5 1.5 1.5" rotation="0 90 0" visible="true"></a-text>
+                <a-sphere id = "lev-1" position="-5 3 2" lev1 rotation="0 0 0" scale="0.5 0.5 0.5" color="#FFFFFF" visible="true">
+                </a-sphere>
+
+                <a-text id= "t2" value="Level 2" position="-5 2 0.5" color="#FFF" scale ="1.5 1.5 1.5" rotation="0 90 0" visible="true"></a-text>
+                <a-sphere id = "lev-2" position="-5 3 0" lev2 rotation="0 0 0" scale="0.5 0.5 0.5" color="#FFFFFF" visible="true">
+                </a-sphere>
+
+                <a-text id= "t3" value="Level 3" position="-5 2 -1.5" color="#FFF" scale ="1.5 1.5 1.5" rotation="0 90 0" visible="true"></a-text>
+                <a-sphere id = "lev-3" position="-5 3 -2" lev3 rotation="0 0 0" scale="0.5 0.5 0.5" color="#FFFFFF" visible="true">
+                </a-sphere>
+            
+                <a-entity light="type:directional; castShadow:true; intensity:0.6; shadowBias:-0.000001; shadowMapWidth:1024; shadowMapHeight:1024;" position="-0.5 1 1"></a-entity>
+                <a-entity light="type: ambient; intensity: 1.0; color:#bbb;"></a-entity>
+
+                <!-- scoreboard -->
+                <a-text id = "til" value="Number of turns" position="3 4 -5" color="#FFF" visible="false"></a-text>
+                <a-text id = "turns" value="0" position="3 3.5 -5" color="#FFF" visible="false"></a-text>
+                <a-text id = "win" value="" position="3 3 -5" color="#FFF"></a-text>
+                
+                <!-- beginner -->
+                <a-box id = "1-1" position="-1.5 4 -5" c1-3 rotation="0 0 0" scale="" color="#F44336" visible="false">
+                </a-box>
+                <a-box id = "1-2" position="-1.5 2.5 -5" c1-2 rotation="0 0 0" scale="" color="#2196F3" visible="false">
+                </a-box>
+                <a-box id = "1-3" position="-1.5 1 -5" c1-1 rotation="0 0 0" scale="" color="#009688" visible="false">            
+                </a-box>
+                <a-box id = "2-1" position="0 4 -5" c2-3 rotation="0 0 0" scale="" color="#E91E63" visible="false">
+                </a-box> 
+                <a-sphere id = "scorb" position="0 2.5 -5" score rotation="0 0 0" scale="0.5 0.5 0.5" color="#FFFFFF" visible="false">
+                </a-sphere>
+                <a-box id = "2-3" position="0 1 -5" c2-1 rotation="0 0 0" scale="" color="#2196F3" visible="false">
+                </a-box>
+                <a-box id = "3-1" position="1.5 4 -5" c3-3 rotation="0 0 0" scale="" color="#009688" visible="false">            
+                </a-box>
+                <a-box id = "3-2" position="1.5 2.5 -5" c3-2 rotation="0 0 0" scale="" color="#E91E63" visible="false">
+                </a-box>
+                <a-box id = "3-3" position="1.5 1 -5" c3-1 rotation="0 0 0" scale="" color="#E91E63" visible="false">
+                </a-box>
+                <a-box position="-1.5 2.5 -5" c1-3 rotation="0 0 0" scale="0.25 5 0.25" color="#FFFFFF" visible="false">
+                </a-box>
+                <a-box position="0 4 -5" c1-3 rotation="0 0 0" scale="5 0.25 0.25" color="#FFFFFF" visible="false">
+                </a-box>
+                <a-box position="1.5 2.5 -5" c1-3 rotation="0 0 0" scale="0.25 5 0.25" color="#FFFFFF" visible="false">
+                </a-box>
+                <a-box position="0 1 -5" c1-3 rotation="0 0 0" scale="5 0.25 0.25" color="#FFFFFF" visible="false">
+                </a-box>
+
+                <!-- reset button goes here -->
+                
+                <a-entity laser-controls="hand: left"></a-entity>
+                <a-entity laser-controls="hand: right"></a-entity>
+
+                <a-plane id="plane" src="#groundTexture" geometry="width:50; height:50;" position="0 0 -4" rotation="-90 0 0"></a-entity>
+            
+                <a-entity id="sky"
+                    geometry="primitive:sphere; radius:500;"
+                    material="shader:flat; color:#222; side:back; height:2048; width:2048"></a-entity>
+            </a-scene>
+
+            <script src="/socket.io/socket.io.js"></script>
+            <script>
+                let socket = io();
+
+                //default connect event
+                socket.on('connect', function() {
+                    console.log("connected!");
+                });
+
+                //let's send some events to the server to pass on. Programmatic telephone game!
+                //querySelector() is a more modern and versatile function of getElementById()
+                //#name or class
+                //.name for classes
+                //etc.
+                //https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector 
+                //note that querySelector can also be used on elements so that you only search for their children
+                //instead of all elements within teh "document"
+
+                //first column
+                document.querySelector('#1-1').addEventListener('click', function() {
+                    socket.emit('Box 1-1 selected!');
+                });
+                document.querySelector('#1-2').addEventListener('click', function() {
+                    socket.emit('Box 1-2 selected!');
+                });
+                document.querySelector('#1-3').addEventListener('click', function() {
+                    socket.emit('Box 1-3 selected!');
+                });
+                
+                //second column - top
+                document.querySelector('#2-1').addEventListener('click', function() {
+                    socket.emit('Box 2-1 selected!');
+                });
+                
+                //score ball
+                document.querySelector('#scorb').addEventListener('click', function() {
+                    socket.emit('Score Ball selected!');
+                });
+                
+                //second column - bottom
+                document.querySelector('#2-3').addEventListener('click', function() {
+                    socket.emit('Box 2-3 selected!');
+                });
+                
+                //third column
+                document.querySelector('#3-1').addEventListener('click', function() {
+                    socket.emit('Box 3-1 selected!');
+                });
+                document.querySelector('#3-1').addEventListener('click', function() {
+                    socket.emit('Box 3-2 selected!');
+                });
+                document.querySelector('#3-3').addEventListener('click', function() {
+                    socket.emit('Box 3-3 selected!');
+                });
+            </script>
+    </body>
+</html>
